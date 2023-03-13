@@ -49,6 +49,7 @@ typedef struct s_fila
 
 typedef struct s_all1
 {
+    int prossu;
     char *cmd;
     t_file1 *file;
     int    A;

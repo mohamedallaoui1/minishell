@@ -117,6 +117,7 @@ void    fill_struct2(char **p, t_all1 **all)
 {
     int  i;
     int  j;
+    int pross;
     int size;
     char type;
     t_all1 *tmp;
@@ -124,6 +125,7 @@ void    fill_struct2(char **p, t_all1 **all)
     tmp= *all;
     i = 0;
     j =0;
+    pross = 0;
     while (size)
     {
         tmp->next = malloc(sizeof(t_all1));

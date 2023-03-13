@@ -163,8 +163,10 @@ int main()
             while(all->next)
             {
                 printf("all->cmd---> %s\n",all->cmd);
-                if (all->file)
+                if (all->file) {
+                    printf("here\n");
                     print_infile(all->file);
+                }
                 all =all->next;
             }
     }

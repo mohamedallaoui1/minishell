@@ -24,21 +24,33 @@ char	*read_line(char *prompt)
 	return (line);
 }
 
-void    ft_here_doc(t_all *all, )
+void    ft_check_heredoc(t_all1 *all)
 {
-    int id;
-    char    *line;
+    t_all1 *tmp;
 
-    id = fork()
-    if (id == 0)
+    while (tmp)
     {
-        all->ft_here_doc = open ("/tmp/here_doc", O_RDWR | O_CREATE | O_APPEND, 0644);
-        if (all->ft_here_doc < 0)
-            perror("Error");
-	    while (1)
-	    {
-	    	line = read_line("heredoc> ");
-	    	write(vars->fd_here_doc, line, ft_strlen(line));
-	    }
+        while (file){
+            if (file->type == 2)
+                open_here_doc();
+            file = file->next;
+        }
+        tmp = tmp->next;
+    }
+}
+
+void    ft_check_heredoc(t_all1 **all)
+{
+    t_all1 *tmp;
+
+    tmp = *all;
+    while (tmp)
+    {
+        while (file){
+            if (file->type == 2)
+                open_here_doc();
+            file = file->next;
+        }
+        tmp = tmp->next;
     }
 }
