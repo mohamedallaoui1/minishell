@@ -6,7 +6,7 @@
 /*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:41:56 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/06 01:42:12 by aerraoui         ###   ########.fr       */
+/*   Updated: 2023/04/11 22:22:32 by aerraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_export2(int flag, t_list *env, char **p)
 		j = ft_check_export(p[i]);
 		if (j == 0)
 		{
-			ft_printf(2, "bash: export: `%s': not a valid identifier", p[i]);
+			ft_printf(2, "bash: export: `%s': not a valid identifier\n", p[i]);
 			flag = 1;
 			i++;
 		}

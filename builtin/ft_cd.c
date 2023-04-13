@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:58:13 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/11 20:47:51 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:17:00 by aerraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int ft_changedir(t_list **env, char *new, char*old)
 				free(head->content);
 			}
 			head->cont = ft_strdup(pwd);
-			head->content = ft_join("PWD=",pwd);
+			head->content = ft_join("PWD=", pwd);
 		}
 		else if (!ft_cmp(head->name, "OLDPWD") && i != -1)
 		{
@@ -85,7 +85,7 @@ int cdwork(int fd, char *p, char *home, t_list **env)
 	{
 		if (!s)
 		{
-			ft_printf(2, "bash: cd: HOME not set\n");
+			ft_printf(2, "bash: cd: OLDPWD not set\n");
 			glob.exit_status = 1;
 		}
 		else
@@ -97,7 +97,7 @@ int cdwork(int fd, char *p, char *home, t_list **env)
 	}
 	else if (ft_cmp(p, "~") == 0)
 	{
-		i = -1;
+		i = -2;
 		if (home)
 			i = ft_changedir(env, home, pwd);
 		else
@@ -116,7 +116,6 @@ int ft_cd(int fd, int check, char **p,t_list *env)
 
 	getcwd(pwd, sizeof(pwd));
 	home = gethome(env);
-	glob.exit_status = 0;
 	if (p[1] != NULL)
 		i = cdwork(fd, p[1], home, &env);
 	else
@@ -133,9 +132,10 @@ int ft_cd(int fd, int check, char **p,t_list *env)
 				return (ft_free(p), 1);
 		}
 	}
-	if (i == -1)
+	if (i == -1 || i == -2)
 	{
-		perror("bash: cd :");
+		if(i == -1)
+			perror("bash: cd :");
 		glob.exit_status = 1;
 	}
 	free(home);

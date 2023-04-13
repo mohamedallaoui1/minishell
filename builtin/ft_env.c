@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:16:09 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/10 04:05:37 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:17:05 by aerraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_env(int fd, int check, char **p, t_list *env)
 {
-	glob.exit_status = 0;
 	if (p[1])
 	{
 		ft_printf(2, "env: %s: No such file or directory\n", p[1]);

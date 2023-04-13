@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
+/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:37:23 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/06 02:25:21 by aerraoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:37:38 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void appand_export(t_list *env,char *p)
 		if (!ft_cmp(tmp->name, name))
 		{
 			appand_exportorm(&tmp, cont);
+			free(name); free(cont);
 			return ;
 		}
 		tmp = tmp->next;
@@ -115,6 +116,9 @@ void exportwork(char *p, int flag, t_list *env)
 		else
 			cont = NULL;
 		add_export(env, p, name, cont);
+		if(cont)
+			free(cont);
+		free(name);
 	}
 	else if (flag == 3)
 		appand_export(env, p);

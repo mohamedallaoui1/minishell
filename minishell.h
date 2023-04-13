@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:15 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/11 18:23:33 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:14:42 by aerraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ extern char **environ;
 typedef struct s_glbl
 {
     int     exit_status;
+    int     check_sig;
     struct termios old_attr;
     struct termios new_attr;
 }       t_glbl;
@@ -104,7 +105,7 @@ void    fill_env(t_list **env);
 void	ft_free(char **p);
 char *expand(t_list *env, char *p);
 void expandfile(t_list *env,t_file1 *file);
-void open_here_doc(t_file1 **file, t_list *env);
+void open_here_doc(t_all1  **all,t_list *env);
 int	ft_cmp(const char *s1, const char *s2);
 char	*ft_specejoin(char *s1, char *s2);
  char *ft_wildcard(char *p);
@@ -136,6 +137,8 @@ void	sort_env(t_list **env);
 int	ft_check_export(char *p);
 void    handle_1(int signum);
 void    handle_2(int signum);
+int check_ambiguous(t_file1 **file, t_list *env);
+
 
  
 

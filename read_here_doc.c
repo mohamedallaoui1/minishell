@@ -75,43 +75,48 @@ void read_here_doc(t_file1 **file,t_list *env)
 		write(1, "> ", 2);
 		line = get_next_line(0);
 	}
-	glob.exit_status = 0;
 	free(limiter);
-	exit(glob.exit_status);
 }
 
 void    handler(int signum)
 {
 	glob.exit_status = 1;
+	printf("\n");
 	exit(glob.exit_status);
 }
 
-void open_here_doc(t_file1 **sile,t_list *env)
+void open_here_doc(t_all1  **all,t_list *env)
 {
 	int id;
 	int fd;
-	t_file1 *file ;
-	int status;
+	t_all1	*tmp;
+	t_file1 *file;
+	int	status;
 
-	file = *sile;
-	while(file)
+	tmp = *all;
+	id = fork();
+	if (id == 0)
 	{
-		if(file->type == HER)
+		signal(SIGINT, handler);
+		signal(SIGQUIT, SIG_DFL);
+		while (tmp)
 		{
-			id = fork();
-			if (id == 0)
+			file = tmp->file;
+			while (file)
 			{
-				signal(SIGINT, handler);
-				read_here_doc(&file, env);
+				if (file->type == HER)
+					read_here_doc(&file, env);
+				file = file->next;
 			}
-			else
-			{
-				signal(SIGINT, handle_1);
-                waitpid(id, &status, 0);
-			}
-			file = file->next;
+			tmp = tmp->next;
 		}
-		else
-			file = file->next;
+		exit(0);
+	}
+	else
+	    waitpid(id, &status, 0);
+	if (WEXITSTATUS(status) == 1)
+	{
+		glob.check_sig = WEXITSTATUS(status);
+		glob.exit_status = WEXITSTATUS(status);
 	}
 }

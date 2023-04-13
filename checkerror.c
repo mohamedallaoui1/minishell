@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   checkerror.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:12:12 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/03/25 17:26:29 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:12:07 by aerraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include"minishell.h"
+
+int syntaxeror(char *p)
+{
+    int i;
+    char type;
+
+    i = 0;
+    while (p && p[i])
+    {
+        if(p[i]== '\'' || p[i] == '"')
+        {
+            type = p[i];
+            i++;
+            while(p[i] && p[i] !=type)
+                i++;
+                i++;
+        }
+        else if(p[i] == ';' || p[i] == '\\')
+        {
+            ft_printf(2, "syntax error\n");
+            return (-1);
+        }
+        else 
+            i++;
+    }
+    return (1);
+}
 
 int ft_erorr(char *buff,char bu,int i)
 {
@@ -253,6 +280,9 @@ int ft_eroro(char *buff)
 {
     int i;
     int c;
+
+    if(syntaxeror(buff) == -1)
+        return(0);
     c = ft_check_erorr(buff);
      if(c == 0)
          return(0); 

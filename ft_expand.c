@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:18:17 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/12 00:34:55 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:25:13 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	count_total(t_list *env, char *p)
 	cont_size = 0;
 	while (p[i])
 	{
+		
 		if (p[i] == '\'')
 		{
 			i++;
@@ -164,6 +165,7 @@ void	mini_expand(char **p, char **new, t_list *env, t_expnd *vars)
 	s = NULL;
 	check = NULL;
 	tmp = NULL;
+
 	if ((*p)[i] == '$')
 	{
 		if ((*p)[i + 1] == '$')
@@ -180,7 +182,7 @@ void	mini_expand(char **p, char **new, t_list *env, t_expnd *vars)
 				(*new)[j++] = tmp[k++];
 			free(tmp);
 		}
-		if (ft_isalnum((*p)[i + 1]))
+		else if (ft_isalnum((*p)[i + 1]))
 		{
 			i++;
 			s = ft_strdupX(ft_firstword(&(*p)[i]));

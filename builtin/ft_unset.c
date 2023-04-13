@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 00:57:10 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/12 00:45:47 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 04:36:24 by aerraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	checker(char *p)
 	int	i;
 
 	i = 0;
-	if ((p[0] >= '0' && p[0] <= '9'))
+	if (!p[0] || (p[0] >= '0' && p[0] <= '9'))
 		return (0);
 	while (p && p[i])
 	{
@@ -45,26 +45,29 @@ void	delet_node(char *p,t_list **env)
 	t_list	*prec;
 	t_list	*cournt;
 
-	cournt = *env;
-	if (!ft_cmp(p, cournt->name))
+	if(ft_cmp(p, "_"))
 	{
-		prec = cournt;
-		cournt = cournt->next;
-		ft_lstdelone1(prec, free);
-		return ;
-	}
-	prec = cournt;
-	cournt = cournt->next;
-	while (cournt)
-	{
+		cournt = *env;
 		if (!ft_cmp(p, cournt->name))
 		{
-			prec->next = cournt->next;
-			ft_lstdelone1(cournt, free);
+			prec = cournt;
+			cournt = cournt->next;
+			ft_lstdelone1(prec, free);
 			return ;
 		}
 		prec = cournt;
 		cournt = cournt->next;
+		while (cournt)
+		{
+			if (!ft_cmp(p, cournt->name))
+			{
+				prec->next = cournt->next;
+				ft_lstdelone1(cournt, free);
+				return ;
+			}
+			prec = cournt;
+			cournt = cournt->next;
+		}
 	}
 }
 
@@ -91,7 +94,6 @@ int	ft_unset2(char **p, t_list *env)
 
 	i = 1;
 	flag = 0;
-	tmp = NULL;
 	while (p && p[i])
 	{
 		tmp = env;
@@ -113,11 +115,11 @@ int	ft_unset(int fd, int check, char **p, t_list *env)
 
 	flag = 0;
 	flag = ft_unset2(p, env);
-	glob.exit_status = 0;
+
 	if (flag)
 		glob.exit_status = 1;
 	set_index(&env);
 	if (check)
-		ft_free(p), exit(glob.exit_status);
+		exit(glob.exit_status);
 	return (ft_free(p), glob.exit_status);
 }

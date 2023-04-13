@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:23:20 by mallaoui          #+#    #+#             */
-/*   Updated: 2023/04/12 01:29:33 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:04:29 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,16 @@ int    open_files(t_exec **vars, t_file1 *file, int check)
     char **cc;
 
     tmp = file;
-    glob.exit_status = 0;
     while(tmp)
     {
         gg = ft_strdup1(tmp->file);
-        gg = ft_wildcard(gg);
-        cc = NULL;
-        cc = ft_split(gg, ' ');
-        if (ft_strchr_normal(tmp->file, '*') && ft_tablen(cc) > 1)
-            (ft_printf(2, "bash: %s: ambiguous redirect\n", tmp->file), glob.exit_status = 1, exit(glob.exit_status));
+        tmp->file = ft_wildcard(tmp->file);
+        cc = ft_split(tmp->file, ' ');
+        if ((ft_strchr_normal(gg, '*') && ft_tablen(cc) > 1)|| !check_ambiguous(&tmp,(*vars)->env ))
+            (ft_printf(2, "bash: %s: ambiguous redirect\n", gg), glob.exit_status = 1, ft_free(cc),exit(glob.exit_status));
         else if (tmp->type == INF)
-        {
-            (*vars)->duppin->infile = open(gg, O_RDONLY);
+        {  
+            (*vars)->duppin->infile = open(tmp->file, O_RDONLY);
             if ((*vars)->duppin->infile < 0)
             {
                 perror("Error");
@@ -70,10 +68,11 @@ int    open_files(t_exec **vars, t_file1 *file, int check)
         }
         else if (tmp->type == OUT || tmp->type == APP)
         {
+            
             if (tmp->type == APP)
-                (*vars)->duppin->outfile = open(gg, O_RDWR | O_CREAT | O_APPEND, 0644);
+                (*vars)->duppin->outfile = open(tmp->file, O_RDWR | O_CREAT | O_APPEND, 0644);
             else
-                (*vars)->duppin->outfile = open(gg, O_RDWR | O_CREAT | O_TRUNC, 0644);
+                (*vars)->duppin->outfile = open(tmp->file, O_RDWR | O_CREAT | O_TRUNC, 0644);
             if ((*vars)->duppin->outfile < 0)
             {
                 perror("Error");
@@ -155,7 +154,10 @@ void    first(t_exec **vars, t_all1 *all)
     else if (all->next != NULL)
         dup2(tmp->fd[1], 1);
     else
+    {
         dup2(tmp->out, 1);
+        close(tmp->fd[1]);
+    }
     join_and_check_if_excutable(tmp, all);
 }
 
@@ -232,15 +234,19 @@ void    free_everything(t_exec *vars)
         ft_free(vars->splited);
 }
 
+
+
 void    execution(t_all1 *all, t_exec **vars, t_list *env)
 {
     t_exec  *tmp;
     t_all1  *temp;
+    char    *fix;
     char **p;
     int save;
 
     tmp = *vars;
     temp = all;
+
     init_struct(&tmp, env);
     indexing(&all);
     tmp->in = dup(0);

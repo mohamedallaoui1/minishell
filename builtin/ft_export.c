@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:40:45 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/10 04:06:38 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:35:20 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_check_export(char *p)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(p[0]) || p[0] == '=' || p[0] == '+')
+	if (!p[0] ||ft_isdigit(p[0]) || p[0] == '=' || p[0] == '+')
 		return (0);
 	while (p && p[i])
 	{
@@ -108,7 +108,6 @@ int ft_export(int fd, int check, char **p, t_list *env)
 
 	flag = 0;
 	tmp = env;
-	glob.exit_status = 0;
 	if (!p[1])
 		afich_expoer(tmp);
 	else
