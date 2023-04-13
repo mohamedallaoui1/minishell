@@ -17,10 +17,8 @@ char *delete_qouats(char *p)
 		{
 			type = p[i];
 			i++;
-			while(p  && p[i] != type)
-			{
+			while(p && p[i] && p[i] != type)
 				new[j++] = p[i++]; 
-			}
 			i++;
 		}
 		else

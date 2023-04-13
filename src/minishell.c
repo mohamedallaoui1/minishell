@@ -1,92 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell->c                                        :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 00:49:53 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 18:50:32 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 23:31:05 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-
-void	initialize(t_all1 **all)
-{
-	(*all)->cmd = NULL;
-	(*all)->file = NULL;
-	(*all)->next = NULL;
-}
-
-
-void	handle(int signum)
-{
-	(void)signum;
-	glob.exit_status = 1;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-void	handle_1(int signum)
-{
-	(void)signum;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-}
-
-void	handle_2(int signum)
-{
-	(void)signum;
-	write(1, "Quit: 3\n", 9);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-}
-
-void	free_struct(t_all1 **all)
-{
-	printf("the cmd is %p\n", (*all)->cmd);
-	exit(0);
-	if ((*all)->cmd)
-		free((*all)->cmd);
-	if ((*all)->file)
-	{
-		if ((*all)->file->file)
-			free((*all)->file->file);
-		if ((*all)->file->limiter)
-			free((*all)->file->limiter);
-		free((*all)->file);
-	}
-	free((*all));
-}
-
-char	*delet_speace(char *p)
-{
-	int		i;
-	int		j;
-	char	*new;
-
-	i = 0;
-	j = 0;
-	new = ft_calloc(ft_strlen(p) + 1, 1);
-	while (p[i])
-	{
-		if (p[i] >= 8 && p[i] < 32)
-		{
-			new[j++] = 32;
-			i++;
-		}
-		else
-			new[j++] = p[i++];
-	}
-	new[j] = '\0';
-	free(p);
-	return (new);
-}
 
 void	pars_and_execute(t_everything **shell)
 {
@@ -117,36 +41,9 @@ void	pars_and_execute(t_everything **shell)
 	}
 }
 
-void	reinitialize(t_everything **shell)
-{
-	(*shell)->all = NULL;
-	(*shell)->file = NULL;
-	(*shell)->vars = NULL;
-	(*shell)->all = malloc(sizeof(t_all1));
-	(*shell)->file = malloc(sizeof(t_file1));
-	(*shell)->vars = malloc(sizeof(t_exec));
-	initialize(&(*shell)->all);
-}
-
-void	free_everything_shell(t_everything **shell)
-{
-	free((*shell)->buffer);
-	free((*shell)->vars);
-	free((*shell)->all);
-	free((*shell)->file);
-}
-
-void	get_attr(void)
-{
-	tcgetattr(STDIN_FILENO, &glob.old_attr);
-	tcgetattr(STDIN_FILENO, &glob.new_attr);
-	tcgetattr(STDIN_FILENO, &glob.reset_attr);
-	glob.old_attr.c_lflag &= ~(ECHOCTL);
-}
-
 int	main(void)
 {
-	t_everything *shell;
+	t_everything	*shell;
 
 	shell = NULL;
 	shell = malloc(sizeof(t_everything));
@@ -166,7 +63,6 @@ int	main(void)
 		(add_history(shell->buff), shell->buffer = \
 		ft_strdup(shell->buff), free(shell->buff));
 		shell->buffer = fix_buffer(shell->buffer);
-		shell->buffer = fix_buffer_v2(shell->buffer);
 		if (shell->buffer && ft_cmp(shell->buffer, "\0") != 0)
 			pars_and_execute(&shell);
 		free_everything_shell(&shell);

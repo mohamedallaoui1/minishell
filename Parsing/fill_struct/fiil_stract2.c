@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_stract2.c                                     :+:      :+:    :+:   */
+/*   fiil_stract2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 23:23:23 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 18:24:35 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 23:30:40 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	qoute_condition(t_all1 *tmp, int *i, char type)
 	{
 		type = tmp->cmd[(*i)];
 			(*i)++;
-		while (tmp->cmd[(*i)] != type)
+		while (tmp->cmd[(*i)] && tmp->cmd[(*i)] != type)
 			(*i)++;
-			(*i)++;
+		(*i)++;
 	}
 }
 
@@ -56,6 +56,7 @@ void	fill_stract2_norm(char **p, t_all1 *tmp, int *arr, char type)
 	{
 		arr[1] = 0;
 		tmp->cmd = ft_strdup(p[arr[0]]);
+		tmp->cmd = fix_buffer_v2(tmp->cmd);
 		tmp->file = NULL;
 		while (tmp->cmd && tmp->cmd[arr[1]])
 		{

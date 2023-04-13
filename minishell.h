@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:15 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 21:40:24 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:21:13 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,5 +183,20 @@ char	*fix_buffer(char *buffer);
 void	free_all(t_all1 **all);
 void	ft_free1(char **p);
 char	*fix_buffer_v2(char *buffer);
+void	reinitialize(t_everything **shell);
+void	free_everything_shell(t_everything **shell);
+void	get_attr(void);
+void	free_struct(t_all1 **all);
+void	handle(int signum);
+void	initialize(t_all1 **all);
+char	*delet_speace(char *p);
+
+
+
+
+
+
+
+
 
 #endif

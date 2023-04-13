@@ -23,17 +23,21 @@ int    check_quotes(char *p)
     {
         if (p[i] == '"')
         {
+            j++;
             i++;
             while (p[i] && p[i] != '"')
                 i++;
-            j++;
+            if(p[i++] == '"')
+                j++;
         }
         else if (p[i] == '\'')
         {
+            k++;
             i++;
             while (p[i] && p[i] != '\'')
                 i++;
-            k++;
+            if(p[i++] == '\'')
+                k++;
         }
         else
             i++;

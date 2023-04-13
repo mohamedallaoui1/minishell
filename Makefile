@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 libft = libft/libft.a
 
-SRC = ft_firstword.c ft_specejoine.c Parsing/Expand/ft_expand.c Parsing/Expand/utils.c	Parsing/Expand/utils1.c check_wild.c src/utils.c src/minishell.c \
+SRC = ft_firstword.c ft_specejoine.c Parsing/Expand/ft_expand.c Parsing/Expand/utils.c	Parsing/Expand/utils1.c check_wild.c src/utils.c src/minishell.c src/utils1.c src/utils2.c\
 fill_struct.c string_handling.c checkerror.c ft_free.c  Parsing/fill_struct/fiil_stract2.c Parsing/fill_struct/utils.c Parsing/fill_struct/utils1.c wildcard.c line/get_next_line.c\
 ft_dprintf/lib/ft_itoa.c ft_dprintf/lib/ft_strlen.c ft_dprintf/lib/ft_putnbr.c ft_dprintf/lib/ft_putchar.c ft_dprintf/lib/ft_puthexa.c ft_dprintf/lib/ft_putstr.c ft_dprintf/lib/ft_putadd.c\
 ft_dprintf/lib/ft_putuns.c ft_dprintf/ft_printf.c\

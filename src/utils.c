@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:10:11 by mallaoui          #+#    #+#             */
-/*   Updated: 2023/04/13 21:53:56 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 23:30:20 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 char	*fix_buffer_v2(char *buffer)
 {
-	int	i;
-	int	j;
-	int	len;
+	int		i;
+	int		j;
+	int		len;
 	char	*new_string;
 
 	i = 0;
 	j = 0;
 	len = ft_strlen(buffer);
-	new_string = malloc(len * 5);
+	new_string = ft_calloc(len * 2, 1);
 	while (buffer[i])
 	{
 		if (buffer[i] == '"')
 		{
-			while (buffer[i] != '"')
-				i++;
-			i++;
+			new_string[j++] = buffer[i++];
+			while (buffer[i] && buffer[i] != '"')
+				new_string[j++] = buffer[i++];
+			new_string[j++] = buffer[i++];
 		}
 		if (buffer[i] == ' ')
 			while (buffer[i] && (buffer[i + 1] == ' '))
@@ -50,7 +51,8 @@ unsigned int len, unsigned int **arr)
 	if ((*arr)[0] > 0 && buffer[(*arr)[0]] == '<' && \
 	buffer[(*arr)[0] + 1] == '<' && buffer[(*arr)[0] - 1] == ' ')
 		(*new_string)[(*arr)[1]++] = buffer[(*arr)[0]++];
-	if ((*arr)[0] > 0 && buffer[(*arr)[0] - 1] != ' ' && buffer[(*arr)[0] - 1] != '<' \
+	if ((*arr)[0] > 0 && buffer[(*arr)[0] - 1] != ' ' && \
+	buffer[(*arr)[0] - 1] != '<' \
 	&& buffer[(*arr)[0] - 1] != '>')
 		(*new_string)[(*arr)[1]++] = ' ';
 	(*new_string)[(*arr)[1]++] = buffer[(*arr)[0]++];
@@ -84,10 +86,7 @@ char	*fix_buffer(char *buffer)
 		else
 			new_string[arr[1]++] = buffer[arr[0]++];
 	}
-	new_string[arr[1]] = '\0';
-	free(buffer);
-	free(arr);
-	return (new_string);
+	return (new_string[arr[1]] = '\0', free(buffer), free(arr), new_string);
 }
 
 void	free_all(t_all1 **all)
