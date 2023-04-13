@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
+/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 00:57:10 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 04:36:24 by aerraoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:19:32 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	ft_unset(int fd, int check, char **p, t_list *env)
 	flag = 0;
 	flag = ft_unset2(p, env);
 
+	fd = 0;
 	if (flag)
 		glob.exit_status = 1;
 	set_index(&env);

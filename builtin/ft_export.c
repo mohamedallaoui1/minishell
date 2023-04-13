@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:40:45 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 06:35:20 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:26:52 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ void	afich_expoer(t_list *env)
 	}
 }
 
-int	ft_check_export(char *p) 
+int	ft_check_export(char *p)
 {
 	int	i;
 
 	i = 0;
-	if (!p[0] ||ft_isdigit(p[0]) || p[0] == '=' || p[0] == '+')
+	if (!p[0] || ft_isdigit(p[0]) || p[0] == '=' || p[0] == '+')
 		return (0);
 	while (p && p[i])
 	{
@@ -98,16 +98,17 @@ int	ft_check_export(char *p)
 	else if (p[i] == '+' && p[i + 1] && p[i +1] == '=')
 		return (3);
 	else
-		return (0);  
+		return (0);
 }
 
-int ft_export(int fd, int check, char **p, t_list *env)
+int	ft_export(int fd, int check, char **p, t_list *env)
 {
 	t_list	*tmp;
 	int		flag;
 
 	flag = 0;
 	tmp = env;
+	fd = 0;
 	if (!p[1])
 		afich_expoer(tmp);
 	else

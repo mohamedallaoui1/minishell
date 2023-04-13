@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 23:49:00 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 06:00:28 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:19:14 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	ft_echo(int fd, int check, char **p, t_list *env)
 	int	flag;
 	int	savei;
 
+	(void)env;
 	i = 1;
 	savei = i ;
 	flag = 0;

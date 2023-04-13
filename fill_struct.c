@@ -6,7 +6,7 @@
 /*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:41:23 by mallaoui          #+#    #+#             */
-/*   Updated: 2023/04/06 23:33:58 by mallaoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:15:06 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	fill_env(t_list **env)
 	int		j;
 	char	*cont;
 	char	*content;
-	char	*tmp;
 
 	i = 0;
 	*env = NULL;

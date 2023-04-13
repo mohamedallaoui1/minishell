@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
+/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:53:15 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/13 02:14:42 by aerraoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:40:24 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H 
-
-
-
 extern char **environ;
 
 #define HER 2
@@ -38,6 +35,7 @@ typedef struct s_glbl
     int     check_sig;
     struct termios old_attr;
     struct termios new_attr;
+    struct termios reset_attr;
 }       t_glbl;
 
 typedef struct s_fila
@@ -81,6 +79,18 @@ typedef struct s_exec
     char **full_cmd;
     int    status;
 }        t_exec;
+
+typedef struct s_everything
+{
+    char **p;
+	char *buffer;
+	t_list *env;
+	t_all1 *all;
+	t_all1 *tmp;
+	t_file1 *file;
+	t_exec *vars;
+	char *buff;
+}       t_everything;
 
 typedef struct s_expn
 {
@@ -138,12 +148,40 @@ int	ft_check_export(char *p);
 void    handle_1(int signum);
 void    handle_2(int signum);
 int check_ambiguous(t_file1 **file, t_list *env);
-
-
- 
-
-
-
-
+/*       mn hnaaaaaa             */
+void	execute(t_exec **vars, t_all1 *all);
+void	middle(t_exec **vars, t_all1 *all);
+void	last(t_exec **vars, t_all1 *all);
+void	first(t_exec **vars, t_all1 *all);
+int	only_white_spaces(char *str);
+int	is_built_in(char *p);
+void	check_built_ins(int fd, int check, char **p, t_exec *vars);
+void	indexing(t_all1 **all);
+int    open_files(t_exec **vars, t_file1 *file, int check);
+void	init_struct(t_exec **vars, t_list *env);
+void	free_everything(t_exec *vars);
+void	search_and_check(t_exec *vars);
+char	*get_content(t_list *env, char *p);
+void	mini_expand(char **p, char **new, t_list *env, t_expnd *vars);
+int	mini_ex_part2(char **p, char **new, t_expnd **vars, t_list *env);
+void	part2_child_hhhh(char **p, char **new, t_expnd **vars);
+int	mini_ex_part1(char **p, char **new, t_expnd **vars);
+char	*ft_strdupx(char *s1);
+void	fill_content(char **new, char *cont, int *i);
+int	count_total(t_list *env, char *p);
+void	count_total_while(char *p, int *i, int *cont_size, t_list *env);
+void	norm_count_total_1(char *p, int	*i, int	*cont_size, t_list *env);
+int	norm_2(char *p, int *i, int *cont_size, t_list *env);
+int	norm_1(char *p, int *i, int *cont_size);
+void	find_token(t_all1 **all, t_file1 **file, int i);
+char	*heredoc_name(int i);
+void	find_file(t_all1 **all, t_file1 **file, int i, int j);
+char	*delete_file(t_all1 **all, t_file1 *file, int i);
+void	delete_file_norm(int *size, int *i, int *x);
+void	fix_buffer_norm(char *buffer, char **new_string, unsigned int len, unsigned int **arr);
+char	*fix_buffer(char *buffer);
+void	free_all(t_all1 **all);
+void	ft_free1(char **p);
+char	*fix_buffer_v2(char *buffer);
 
 #endif

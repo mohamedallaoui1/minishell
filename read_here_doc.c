@@ -80,6 +80,7 @@ void read_here_doc(t_file1 **file,t_list *env)
 
 void    handler(int signum)
 {
+	(void)signum;
 	glob.exit_status = 1;
 	printf("\n");
 	exit(glob.exit_status);
@@ -88,7 +89,6 @@ void    handler(int signum)
 void open_here_doc(t_all1  **all,t_list *env)
 {
 	int id;
-	int fd;
 	t_all1	*tmp;
 	t_file1 *file;
 	int	status;

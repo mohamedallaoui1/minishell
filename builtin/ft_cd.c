@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
+/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:58:13 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/12 23:17:00 by aerraoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:18:12 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int cdwork(int fd, char *p, char *home, t_list **env)
 
 	getcwd(pwd, sizeof(pwd));
 	s = getold(*env);
+	i = 0;
 	if (ft_cmp(p, "-") == 0)
 	{
 		if (!s)

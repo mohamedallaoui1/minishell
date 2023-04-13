@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkerror.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerraoui <aerraoui <marvin@42.fr>>         +#+  +:+       +#+        */
+/*   By: mallaoui <mallaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:12:12 by aerraoui          #+#    #+#             */
-/*   Updated: 2023/04/12 23:12:07 by aerraoui         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:15:35 by mallaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int number_que(char *buff)
     int countdouble = 1;
     int countsingla = 1;
     i = 0;
-    char c;
+
     while(buff[i])
     {
         if(buff[i] == '\'')
